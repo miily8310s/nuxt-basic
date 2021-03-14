@@ -1,0 +1,10 @@
+{
+  "files.insertFinalNewline": true,
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "vue"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "emmet.includeLanguages": {
+    "vue-html": "html"
+  }
+}
