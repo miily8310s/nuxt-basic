@@ -1,6 +1,10 @@
 <template>
   <div class="grid grid-cols-10">
-    <div v-for="(movie, index) in list" :key="index" class="mr-4 mt-5">
+    <div
+      v-for="(movie, index) in list"
+      :key="index"
+      class="mr-4 mt-5 relative overflow-hidden"
+    >
       <div>
         <img
           :src="
@@ -10,11 +14,24 @@
           alt="movie.title"
           class="w-96"
         />
+        <div
+          class="absolute top-0 right-0 m-3 py-2 px-3 bg-yellow-300 rounded-2xl font-bold"
+        >
+          {{ getAverage(movie.vote_average) }}
+        </div>
+        <div
+          class="absolute bottom-0 left-0 p-3 bg-gray-800 w-full movie-info opacity-80"
+        >
+          <h3>{{ movie.title !== undefined ? movie.title : movie.name }}</h3>
+          <h3>
+            {{
+              movie.title !== undefined
+                ? movie.release_date
+                : movie.first_air_date
+            }}
+          </h3>
+        </div>
       </div>
-      <h3 v-if="movie.title !== ''">{{ movie.title }}</h3>
-      <h3 v-if="movie.name !== ''">{{ movie.name }}</h3>
-      <h3 v-if="movie.title !== ''">{{ movie.release_date }}</h3>
-      <h3 v-if="movie.name !== ''">{{ movie.first_air_date }}</h3>
     </div>
   </div>
 </template>
@@ -24,7 +41,18 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'MovieShowList',
   props: {
-    list: Array,
+    list: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    getAverage(average: string) {
+      if (Number.isInteger(average)) {
+        return average + '.0'
+      }
+      return average
+    },
   },
 })
 </script>
@@ -34,5 +62,8 @@ export default Vue.extend({
   overflow: hidden;
   overflow-x: scroll;
   min-width: 500px;
+}
+.movie-info {
+  transition: all 0.3s linear;
 }
 </style>
