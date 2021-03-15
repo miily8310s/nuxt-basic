@@ -3,7 +3,10 @@
     <div
       v-for="(movie, index) in list"
       :key="index"
-      class="mr-4 mt-5 relative overflow-hidden"
+      class="mr-4 mt-5 relative overflow-hidden cursor-pointer"
+      @click="
+        openDetailPage(movie.id, movie.title !== undefined ? 'movie' : 'tv')
+      "
     >
       <div>
         <img
@@ -52,6 +55,9 @@ export default Vue.extend({
         return average + '.0'
       }
       return average
+    },
+    openDetailPage(id: string, media: string) {
+      this.$router.push(`detail?id=${id}&media=${media}`)
     },
   },
 })
