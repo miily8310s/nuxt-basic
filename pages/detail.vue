@@ -12,11 +12,11 @@
             alt="movie.id"
           />
           <span class="text-xl m-auto">{{ movie.tagline }}</span>
-          <div class="flex space-x-3 text-3xl m-auto">
-            <span>Rate</span>
-            <span>People</span>
+          <div class="flex justify-around text-3xl">
+            <span class="flex justify-center items-center w-14">Rate</span>
+            <span class="flex justify-center items-center w-14">People</span>
           </div>
-          <div class="flex space-x-3 text-3xl m-auto">
+          <div class="flex justify-around text-3xl">
             <span>{{ movie.vote_average }}</span>
             <span>{{ movie.vote_count }}</span>
           </div>
@@ -68,16 +68,12 @@ export default Vue.extend({
         this.movie = await fetch(
           `${MOVIEDB_API_URL}movie/${this.id}?api_key=${process.env.API_KEY}`
         ).then((res) => res.json())
-        // const data1 = await res1.json()
-        // this.movie = data1
         break
       }
       case 'tv': {
         this.movie = await fetch(
           `${MOVIEDB_API_URL}tv/${this.id}?api_key=${process.env.API_KEY}`
         ).then((res) => res.json())
-        // const data2 = await res2.json()
-        // this.movie = data2
         break
       }
     }
